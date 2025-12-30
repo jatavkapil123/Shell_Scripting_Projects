@@ -3,7 +3,8 @@
 echo "Docker Setup Script Started"
 
 # Check OS
-if [ "$(uname)" != "Linux" ]; then
+if [ "$(uname)" != "Linux" ]; 
+then
     echo "This is not a Linux system. Exiting..."
     exit 1
 fi
@@ -35,4 +36,3 @@ read -s -p "Docker Password: " DOCKER_PASS
 echo
 
 echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
-
