@@ -43,3 +43,25 @@ tar -czf "$BACKUP_DIR.tar.gz" -C "$BACKUP_BASE_DIR" "$(basename $BACKUP_DIR)"
 rm -rf "$BACKUP_DIR"
 
 echo "📦 Backup compressed: $BACKUP_DIR.tar.gz"
+
+
+
+
+#############  Using MongoDB String ##############
+
+
+#!/bin/bash
+
+MONGO_URI="mongodb://backupuser:StrongPassword@remote.mongodb.server:27017/mydatabase?authSource=admin"
+
+BACKUP_DIR="/opt/mongo-backups/backup-$(date +%F-%H%M)"
+mkdir -p "$BACKUP_DIR"
+
+mongodump --uri="$MONGO_URI" --out="$BACKUP_DIR"
+
+if [ $? -eq 0 ]; then
+  echo "✅ Backup completed"
+else
+  echo "❌ Backup failed"
+  exit 1
+fi
